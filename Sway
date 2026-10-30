@@ -90,12 +90,10 @@ bindsym $mod+Shift+$right move right
 bindsym $mod+f fullscreen toggle
 bindsym $mod+v floating toggle
 
-## СКРИНШОТЫ (БЫСТРЫЙ RUST-ИНСТРУМЕНТ WAYSHOT)
-# Полный скриншот всего экрана по кнопке PrintScreen
 bindsym Print exec wayshot -f ~/Изображения/scr_$(date +%Y%m%d_%H%M%S).png
 
-# Скриншот области по Super + S (Стримит картинку прямо в буфер через stdout)
-bindsym $mod+s exec wayshot -s "$(slurp)" --stdout | wl-copy
+# Скриншот области по Super + S (Сначала мгновенно копирует в буфер, затем параллельно сохраняет в файлn)
+bindsym $mod+s exec grim -g "$(slurp)" - | wl-copy
 
 ## Рабочие пространства (Воркспейсы)
 bindsym $mod+1 workspace number 1

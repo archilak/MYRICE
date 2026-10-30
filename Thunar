@@ -1,1 +1,104 @@
+/* Полное перекрытие всех окон, панелей и сетки файлов */
+.thunar, 
+thunar-window, 
+.thunar scrolledwindow, 
+.thunar treeview, 
+.thunar listview,
+.thunar notebook,
+.thunar toolbar,
+.thunar iconview,
+.view {
+    background-color: #0a0a0a;
+    background: #0a0a0a;
+    color: #ffffff;
+}
 
+/* Перекрашиваем белую плашку заголовков (Название, Размер, Тип...) */
+.thunar treeview button,
+.thunar treeview header,
+.thunar treeview header button,
+treeview header button {
+    background-color: #0a0a0a;
+    background: #0a0a0a;
+    color: #888888; /* Делаем текст заголовков приглушенно-серым */
+    border: none;
+    border-bottom: 1px solid #333332; /* Тонкая TUI-полоска снизу */
+    border-right: 1px solid #333332;  /* Разделители колонок */
+    box-shadow: none;
+    text-shadow: none;
+}
+
+/* Подсветка заголовков при наведении курсора */
+.thunar treeview header button:hover {
+    background-color: #141414;
+    color: #ffffff;
+}
+
+/* Верхняя панель меню (Файл, Правка, Вид) */
+.thunar menubar,
+thunar-window menubar,
+menubar,
+menubar item {
+    background-color: #0a0a0a;
+    background: #0a0a0a;
+    color: #ffffff;
+}
+
+/* Боковая панель (дерево папок) */
+.thunar treeview.view {
+    background-color: #0f0f0f;
+    color: #cccccc;
+}
+
+/* Выделенные папки и файлы (инверсия в белый цвет) */
+.thunar treeview.view:selected, 
+.thunar listview.view:selected,
+.thunar iconview:selected,
+.thunar .view:selected,
+.view:selected,
+.view:selected:focus {
+    background-color: #ffffff;
+    color: #0a0a0a;
+}
+
+/* Подсветка при наведении курсора */
+.thunar treeview.view:hover, 
+.thunar listview.view:hover,
+.thunar iconview:hover,
+.thunar .view:hover,
+menubar item:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Строгие тонкие разделители в стиле TUI */
+.thunar paned separator {
+    background-color: #ffffff;
+    min-width: 1px;
+    min-height: 1px;
+}
+
+/* Поле ввода адреса/пути и поиска */
+.thunar entry {
+    background-color: #141414;
+    color: #ffffff;
+    border: 1px solid #333332;
+    border-radius: 0px;
+}
+
+/* Нижний статусбар (строка состояния) */
+.thunar statusbar,
+thunar-window statusbar {
+    background-color: #0a0a0a;
+    color: #ffffff;
+}
+
+/* Контекстное меню (правая кнопка мыши и выпадающие списки сверху) */
+menu, menuitem, .menu, .menuitem {
+    background-color: #0f0f0f;
+    color: #ffffff;
+    border: 1px solid #333332;
+}
+menu menuitem:hover, .menu .menuitem:hover {
+    background-color: #ffffff;
+    color: #0a0a0a;
+}

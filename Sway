@@ -1,5 +1,5 @@
 ### =========================================================================
-### ПОЛНЫЙ МОНОХРОМНЫЙ КОНФИГ SWAY (СПИРАЛЬНЫЙ ЛЕЙАУТ + DMENU)
+### ПОЛНЫЙ МОНОХРОМНЫЙ КОНФИГ SWAY (СПИРАЛЬНЫЙ ЛЕЙАУТ + DMENU + БАР)
 ### =========================================================================
 
 # Клавиша-модификатор (Mod4 = Клавиша Windows / Super)
@@ -15,13 +15,16 @@ set $right l
 set $term rio
 set $menu dmenu_run -nb '#000000' -nf '#ffffff' -sb '#ffffff' -sf '#000000' -fn 'monospace-10'
 
+# ВКЛЮЧЕНИЕ ПЕРЕТАСКИВАНИЯ: Зажмите Super + ЛКМ, чтобы двигать плавающие панели
+floating_modifier $mod normal
+
 ### --- 1. АВТОЗАПУСК И СЕРВИСЫ ----------------------------------------------
 
 # Автоматический спиральный лейаут окон (как в Hyprland)
 exec_always autotiling-rs
 
 # Обои (Чистый глубокий чёрный цвет для монохромного стиля)
-output * bg #000000 solid
+output * bg #000000 solid_color
 
 ### --- 2. НАСТРОЙКИ УСТРОЙСТВ ВВОДА ----------------------------------------
 
@@ -64,24 +67,35 @@ gaps outer 4
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e exec swaynag -t warning -m 'Выйти из Sway?' -B 'Да' 'swaymsg exit'
 
-## Закрытие активного окна
+## Закрытие active окна (Super + C)
 bindsym $mod+c kill
 
 ## Запуск приложений
 bindsym $mod+q exec $term
 bindsym $mod+space exec $menu
 
-## Управление фокусом (Vim-style)
+## Управление фокусом (Vim-style) — Обычный Super + H/J/K/L
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
 bindsym $mod+$up focus up
 bindsym $mod+$right focus right
 
-## Перемещение окон (Vim-style)
+## Перемещение окон на плитках (Vim-style) — Super + Shift + H/J/K/L
 bindsym $mod+Shift+$left move left
 bindsym $mod+Shift+$down move down
 bindsym $mod+Shift+$up move up
 bindsym $mod+Shift+$right move right
+
+## Режимы окон (Полный экран на Super+F, плавающее на Super+V)
+bindsym $mod+f fullscreen toggle
+bindsym $mod+v floating toggle
+
+## СКРИНШОТЫ (БЫСТРЫЙ RUST-ИНСТРУМЕНТ WAYSHOT)
+# Полный скриншот всего экрана по кнопке PrintScreen
+bindsym Print exec wayshot -f ~/Изображения/scr_$(date +%Y%m%d_%H%M%S).png
+
+# Скриншот области по Super + S (Стримит картинку прямо в буфер через stdout)
+bindsym $mod+s exec wayshot -s "$(slurp)" --stdout | wl-copy
 
 ## Рабочие пространства (Воркспейсы)
 bindsym $mod+1 workspace number 1
@@ -107,10 +121,6 @@ bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10
 
-## Режимы окон и управление
-bindsym $mod+f fullscreen toggle
-bindsym $mod+Shift+space floating toggle
-
 ### --- 5. МУЛЬТИМЕДИА КЛАВИШИ ----------------------------------------------
 
 # Громкость звука (работает через pactl)
@@ -121,3 +131,20 @@ bindcode 121 exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 # Яркость экрана (требуется утилита brightnessctl)
 bindcode 232 exec brightnessctl set 5%-
 bindcode 233 exec brightnessctl set +5%
+
+### --- 6. УЛЬТРАЛЕГКИЙ ЧЕРНО-БЕЛЫЙ БАР -------------------------------------
+
+bar {
+    swaybar_command swaybar
+    status_command i3status-rs ~/.config/i3status-rust/config.toml
+    position top
+
+    colors {
+        statusline #ffffff
+        background #000000
+        inactive_workspace #000000 #000000 #888888
+        focused_workspace  #ffffff #ffffff #000000
+        active_workspace   #000000 #000000 #ffffff
+        urgent_workspace   #ffffff #ffffff #000000
+    }
+}

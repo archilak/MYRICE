@@ -1,1 +1,54 @@
+# --- Настройки шрифта ---
+[fonts]
+size = 13.0
+regular = { family = "JetBrainsMono Nerd Font", style = "normal" }
+bold = { family = "JetBrainsMono Nerd Font", style = "bold" }
+
+# --- Окно и прозрачность ---
+[window]
+width = 600
+height = 400
+padding-x = 12
+decorations = "Buttonless"
+blur = true                
+
+[renderer]
+performance = "High"
+backend = "Vulkan"
+
+# --- Прозрачность фона ---
+[background]
+opacity = 0.85
+
+# --- Черно-белая палитра (Monochrome Rio Custom) ---
+[colors]
+background = "#000000"
+foreground = "#ffffff"
+cursor = "#ffffff"
+tabs = "#333333"
+tabs-active = "#ffffff"
+
+# Базовые ANSI цвета (0-7)
+black = "#000000"
+red = "#444444"
+green = "#777777"      # Менее светлый серый (вместо зеленого)
+yellow = "#888888"
+blue = "#dddddd"       # Светло-серый (вместо синего)
+magenta = "#cccccc"
+cyan = "#eeeeee"
+white = "#ffffff"
+
+# Яркие ANSI цвета (8-15)
+light-black = "#555555"
+light-red = "#666666"
+light-green = "#999999"      # Яркий менее светлый серый (вместо зеленого)
+light-yellow = "#aaaaaa"
+light-blue = "#f0f0f0"       # Яркий светло-серый (вместо синего)
+light-magenta = "#dddddd"
+light-cyan = "#eeeeee"
+light-white = "#ffffff"
+
+[colors.selection]
+background = "#ffffff"
+foreground = "#000000"
 
